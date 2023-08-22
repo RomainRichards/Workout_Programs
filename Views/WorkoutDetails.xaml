@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Workout_Programs.Views"
         mc:Ignorable="d"
-        Title="WorkoutDetails" Height="600" Width="1080" WindowStartupLocation="CenterScreen">
+        Title="WorkoutDetails" Height="600" Width="1045" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="388*"/>
@@ -24,7 +24,6 @@
             <ListView.View>
                 <GridView>
 
-                    <GridViewColumn Header="ID" Width="30"   DisplayMemberBinding="{Binding ID}"/>
                     <GridViewColumn Header="Workout" Width="100" DisplayMemberBinding="{Binding Workout1}"/>
                     <GridViewColumn Header="Sets / Reps" Width="80" DisplayMemberBinding="{Binding Sets_Reps1}"/>
                     <GridViewColumn Header="Weight (lbs)" Width="80" DisplayMemberBinding="{Binding Weight1}"/>
@@ -47,7 +46,7 @@
                                                 CommandParameter="{Binding}"/>
 
                                     <Button Name="BtnPrint" Content="Print" Width="50" Height="25" Margin="10,0,0,0"
-                                                Command="{Binding DataContext.OpenUpdate,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                                Command="{Binding DataContext.SaveCommand,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
                                                 CommandParameter="{Binding}"/>
 
                                 </StackPanel>
@@ -88,7 +87,7 @@
                         </Grid.RowDefinitions>
 
                         <!--Workout label, comboBox, textblock, sets/reps & weight-->
-                        <Label Grid.Row="0" Grid.Column="0" Content="Upper Body"/>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Workout"/>
                         <TextBox  Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding WorkoutDetail.Workout1}"/>
 
                         <Label Grid.Row="1" Grid.Column="0" Content="Sets / Reps"/>
@@ -98,7 +97,7 @@
                         <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Text="{Binding WorkoutDetail.Weight1}"/>
 
                         <!--Workout label, comboBox, textblock, sets/reps & weight-->
-                        <Label Grid.Row="3" Grid.Column="0" Content="Lower Body"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content="Workout"/>
                         <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding WorkoutDetail.Workout2}"/>
 
                         <Label Grid.Row="4" Grid.Column="0" Content="Sets / Reps"/>
@@ -108,7 +107,7 @@
                         <TextBox Grid.Row="5" Grid.Column="1" Margin="3" Text="{Binding WorkoutDetail.Sets_Reps2}"/>
 
                         <!--Workout label, comboBox, textblock, sets/reps & weight-->
-                        <Label Grid.Row="6" Grid.Column="0" Content="Abs"/>
+                        <Label Grid.Row="6" Grid.Column="0" Content="Workout"/>
                         <TextBox Grid.Row="6" Grid.Column="1" Margin="3" Text="{Binding WorkoutDetail.Workout3}"/>
 
                         <Label Grid.Row="7" Grid.Column="0" Content="Sets / Reps"/>
@@ -149,7 +148,7 @@
                         </Grid.RowDefinitions>
 
                         <!--Workout label, comboBox, textblock, sets/reps & weight-->
-                        <Label Grid.Row="0" Grid.Column="0" Content="Upper Body"/>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Workout"/>
                         <TextBox  Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding SelectedWorkoutDetail.Workout1}"/>
                             
                         <Label Grid.Row="1" Grid.Column="0" Content="Sets / Reps"/>
@@ -159,7 +158,7 @@
                         <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Text="{Binding SelectedWorkoutDetail.Weight1}"/>
 
                         <!--Workout label, comboBox, textblock, sets/reps & weight-->
-                        <Label Grid.Row="3" Grid.Column="0" Content="Lower Body"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content="Workout"/>
                         <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding SelectedWorkoutDetail.Workout2}"/>
                         
                         <Label Grid.Row="4" Grid.Column="0" Content="Sets / Reps"/>
@@ -169,7 +168,7 @@
                         <TextBox Grid.Row="5" Grid.Column="1" Margin="3" Text="{Binding SelectedWorkoutDetail.Sets_Reps2}"/>
 
                         <!--Workout label, comboBox, textblock, sets/reps & weight-->
-                        <Label Grid.Row="6" Grid.Column="0" Content="Abs"/>
+                        <Label Grid.Row="6" Grid.Column="0" Content="Workout"/>
                         <TextBox Grid.Row="6" Grid.Column="1" Margin="3" Text="{Binding SelectedWorkoutDetail.Workout3}"/>
                         
                         <Label Grid.Row="7" Grid.Column="0" Content="Sets / Reps"/>
