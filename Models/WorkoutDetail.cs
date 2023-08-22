@@ -100,7 +100,7 @@ namespace Workout_Programs.Models
             get => workout3; 
             set
             {
-                Workout3 = value;
+                workout3 = value;
                 OnPropertyChanged(nameof(Workout3));
             }
         }
