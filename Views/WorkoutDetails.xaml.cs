@@ -25,5 +25,12 @@ namespace Workout_Programs.Views
             InitializeComponent();
             DataContext = new WorkoutViewModel();
         }
+
+        // Move window without from anywhere.
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
     }
 }
