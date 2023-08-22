@@ -1,0 +1,231 @@
+﻿<Window x:Class="Workout_Programs.Views.WorkoutDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Workout_Programs.Views"
+        mc:Ignorable="d"
+        Title="WorkoutDetails" Height="600" Width="1025">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="388*"/>
+            <ColumnDefinition Width="637*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ListView 
+            ItemsSource="{Binding LstWorkoutTable}" 
+            SelectedItem="{Binding SelectedWorkout}"
+            Grid.ColumnSpan="2"
+            HorizontalContentAlignment="Center"
+            HorizontalAlignment="Center">
+            <ListView.View>
+                <GridView>
+
+                    <GridViewColumn Header="ID" Width="40"   DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Workout" Width="100" DisplayMemberBinding="{Binding Workout1}"/>
+                    <GridViewColumn Header="Sets / Reps" Width="80" DisplayMemberBinding="{Binding Sets_Reps1}"/>
+                    <GridViewColumn Header="Weight (lbs)" Width="100" DisplayMemberBinding="{Binding Weight1}"/>
+                    <GridViewColumn Header="Workout" Width="100" DisplayMemberBinding="{Binding Workout2}"/>
+                    <GridViewColumn Header="Sets / Reps" Width="80" DisplayMemberBinding="{Binding Sets_Reps2}"/>
+                    <GridViewColumn Header="Weight (lbs)" Width="60" DisplayMemberBinding="{Binding Weight2}"/>
+                    <GridViewColumn Header="Workout" Width="100" DisplayMemberBinding="{Binding Workout3}"/>
+                    <GridViewColumn Header="Sets / Reps" Width="80" DisplayMemberBinding="{Binding Sets_Reps3}"/>
+                    <GridViewColumn Header="Weight (lbs)" Width="80" DisplayMemberBinding="{Binding Weight3}"/>
+                    <GridViewColumn Header="Action" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="4">
+                                    <Button Name="BtnUpdate" Content="Upadate" Width="50" Height="25" Margin="10,0,0,0"
+                                                Command="{Binding DataContext.UpdateCommand,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" 
+                                                CommandParameter="{Binding}"/>
+
+                                    <Button Name="BtnDelete" Content="Delete" Width="50" Height="25" Margin="10,0,0,0" 
+                                                Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" 
+                                                CommandParameter="{Binding}"/>
+
+                                    <Button Name="BtnPrint" Content="Print" Width="50" Height="25" Margin="10,0,0,0"
+                                                Command="{Binding DataContext.OpenUpdate,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                                CommandParameter="{Binding}"/>
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="5">
+                <StackPanel Margin="5">
+                    <Label Content="Add Workout" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="Workout 1"/>
+                        <ComboBox 
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            ItemsSource="{Binding UpperBodyCollection,Mode=OneTime}"
+                            SelectedItem="{Binding SelectedWorkout.UpperBodyID}"
+                            HorizontalContentAlignment="Center"
+                            Margin="3"
+                            DisplayMemberPath="UpperBody1"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="Sets / Reps"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="3"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Content="Weight (lbs)"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Margin="3"/>
+
+                        <Label Grid.Row="3" Grid.Column="0" Content="Workout 2"/>
+                        <ComboBox 
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            ItemsSource="{Binding LowerBodyCollection,Mode=OneWay}"
+                            HorizontalContentAlignment="Center"
+                            Margin="3"
+                            DisplayMemberPath="LowerBody1"/>
+
+                        <Label Grid.Row="4" Grid.Column="0" Content="Sets / Reps"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Margin="3"/>
+
+                        <Label Grid.Row="5" Grid.Column="0" Content="Weight (lbs)"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Margin="3"/>
+
+                        <Label Grid.Row="6" Grid.Column="0" Content="Workout 3"/>
+                        <ComboBox 
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            ItemsSource="{Binding AbCollection,Mode=OneWay}"
+                            HorizontalContentAlignment="Center"
+                            Margin="3"
+                            DisplayMemberPath="Abs"/>
+
+                        <Label Grid.Row="7" Grid.Column="0" Content="Sets / Reps"/>
+                        <TextBox Grid.Row="7" Grid.Column="1" Margin="3"/>
+
+                        <Label Grid.Row="8" Grid.Column="0" Content="Weight (lbs)"/>
+                        <TextBox Grid.Row="8" Grid.Column="1" Margin="3"/>
+
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!--Update workout code start-->
+            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="5">
+                <StackPanel Margin="5">
+                    <Label Content="Update Workout" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <!--UpperBody label, comboBox, textblock, sets/reps & weight-->
+                        <Label Grid.Row="0" Grid.Column="0" Content="Upper Body"/>
+                        <ComboBox 
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Width="100"
+                            Margin="3"
+                            ItemsSource="{Binding UpperBodyCollection}"
+                            SelectedItem="{Binding SelectedUpperBody}"
+                            DisplayMemberPath="UpperBody1"
+                            />
+                        <TextBlock x:Name="SelectedCategoryText" Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding SelectedCategoryText}"/>
+                        <Label Grid.Row="1" Grid.Column="0" Content="Sets / Reps"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding SelectedWorkout.Sets___Reps1}"/>
+                        <Label Grid.Row="2" Grid.Column="0" Content="Weight (lbs)"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Text="{Binding SelectedWorkout.Weight1}"/>
+
+                        <!--LowerBody label, comboBox, textblock, sets/reps & weight-->
+                        <Label Grid.Row="3" Grid.Column="0" Content="Lower Body"/>
+                        <ComboBox 
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Width="100"
+                            Margin="3"                          
+                            ItemsSource="{Binding LowerBodyCollection}"
+                            SelectedItem="{Binding SelectedLowerBody}"
+                            DisplayMemberPath="LowerBody1"
+                            />
+                        <TextBlock x:Name="SelectedWorkout_LowerBodyID" Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding SelectedCategoryText1}"/>
+                        <Label Grid.Row="4" Grid.Column="0" Content="Sets / Reps"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Margin="3" Text="{Binding SelectedWorkout.Sets___Reps2}"/>
+
+                        <Label Grid.Row="5" Grid.Column="0" Content="Weight (lbs)"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Margin="3" Text="{Binding SelectedWorkout.Weight2}"/>
+
+                        <!--Abs label, comboBox, textblock, sets/reps & weight-->
+                        <Label Grid.Row="6" Grid.Column="0" Content="Abs"/>
+                        <ComboBox 
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            HorizontalAlignment="Right"
+                            HorizontalContentAlignment="Center"
+                            Width="100"
+                            Margin="3" 
+                            ItemsSource="{Binding AbCollection}"
+                            SelectedItem="{Binding SelectedAb}"
+                            DisplayMemberPath="Abs"/>
+                        <TextBlock x:Name="SelectedWorkout_AbsID" Grid.Row="6" Grid.Column="1" Margin="3" Text="{Binding SelectedCategoryText2}"/>
+                        <Label Grid.Row="7" Grid.Column="0" Content="Sets / Reps"/>
+                        <TextBox Grid.Row="7" Grid.Column="1" Margin="3" Text="{Binding SelectedWorkout.Sets___Reps_3}"/>
+
+                        <Label Grid.Row="8" Grid.Column="0" Content="Weight (lbs)"/>
+                        <TextBox Grid.Row="8" Grid.Column="1" Margin="3" Text="{Binding SelectedWorkout.Weight_3}"/>
+
+                        <Button Grid.Row="9" Grid.ColumnSpan="2"  Content="Update" Margin="5" HorizontalAlignment="Right" 
+                                Width="100" Command="{Binding UpdateWorkoutCommand}"/>
+
+
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <!--Update workout code ends-->
+        </Grid>
+    </Grid>
+</Window>
