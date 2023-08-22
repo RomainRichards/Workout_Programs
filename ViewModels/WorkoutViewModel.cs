@@ -13,9 +13,9 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Workout_Programs.Models;
-//using DocumentFormat.OpenXml.Packaging;
-//using DocumentFormat.OpenXml.Wordprocessing;
-//using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace Workout_Programs.ViewModels
 {
@@ -78,7 +78,7 @@ namespace Workout_Programs.ViewModels
             UpdateCommand = new Command((s) => true, Select_Update);
             AddWorkoutCommand = new Command((s) => true, AddWorkout);
             UpdateWorkoutCommand = new Command((s) => true, UpdateWorkout);
-           // SaveCommand = new Command((s) => true, SaveWorkout);
+            SaveCommand = new Command((s) => true, SaveWorkout);
         }
 
 
@@ -106,6 +106,7 @@ namespace Workout_Programs.ViewModels
             if(SelectedWorkoutDetail != null)
             {
                 workoutProgramDBEntities.SaveChanges();
+                SelectedWorkoutDetail = new WorkoutDetail();
             }
             else
             {
@@ -119,7 +120,6 @@ namespace Workout_Programs.ViewModels
         private void Select_Update(object obj)
         {
             SelectedWorkoutDetail=obj as WorkoutDetail;
-            SelectedWorkoutDetail = new WorkoutDetail();
         }
 
         // Delete workout.
@@ -141,49 +141,60 @@ namespace Workout_Programs.ViewModels
         public ICommand UpdateCommand { get; set; }
         public ICommand UpdateWorkoutCommand { get; set; }
         public ICommand AddWorkoutCommand { get; set; }
-       // public ICommand SaveCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
 
 
 
 
-        //private void SaveWorkout(object obj)
-        //{
-        //    // Check if a workout is selected
-        //    if (SelectedWorkoutDetail != null)
-        //    {
-        //        Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
-        //        saveFileDialog.Filter = "Word Documents (*.docx)|*.docx|All Files (*.*)|*.*";
+        private void SaveWorkout(object obj)
+        {
+            // Check if a workout is selected
+            if (SelectedWorkoutDetail != null)
+            {
+                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
+                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
 
-        //        if (saveFileDialog.ShowDialog() == true)
-        //        {
-        //            string filePath = saveFileDialog.FileName;
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    string filePath = saveFileDialog.FileName;
 
-        //            // Create a Word document
-        //            using (WordprocessingDocument doc = WordprocessingDocument.Create(filePath, WordprocessingDocumentType.Document))
-        //            {
-        //                // Add a main document part
-        //                MainDocumentPart mainPart = doc.AddMainDocumentPart();
-        //                mainPart.Document = new Document();
+                    try
+                    {
+                        // Create or overwrite the text file
+                        using (StreamWriter writer = new StreamWriter(filePath))
+                        {
+                            // Write workout details to the file
+                            writer.WriteLine($"\t\t\tTodays Workout | {DateTime.Now}\n\n");
+                            writer.WriteLine($"Workout 1 : \n\t{SelectedWorkoutDetail.Workout1}\n");
+                            writer.WriteLine($"\tSets / Reps : {SelectedWorkoutDetail.Sets_Reps1}\n");
+                            writer.WriteLine($"\tWeight (lbs) : {SelectedWorkoutDetail.Weight1} \n");
+                            writer.WriteLine($"\t\t\t**** 45 seconds rest after each set *****\n\n");
+                            writer.WriteLine($"Workout 2 : \n\t{SelectedWorkoutDetail.Workout2}\n");
+                            writer.WriteLine($"\tSets / Reps : {SelectedWorkoutDetail.Sets_Reps2}\n");
+                            writer.WriteLine($"\tWeight (lbs) : {SelectedWorkoutDetail.Weight2} \n");
+                            writer.WriteLine($"\t\t\t**** 45 seconds rest after each set *****\n\n");
+                            writer.WriteLine($"Workout 3 : \n\t{SelectedWorkoutDetail.Workout3}\n");
+                            writer.WriteLine($"\tSets / Reps : {SelectedWorkoutDetail.Sets_Reps3}\n");
+                            writer.WriteLine($"\tWeight (lbs) : {SelectedWorkoutDetail.Weight3} \n\n\n\n");
+                            writer.WriteLine($"\t\t\t\t***** Great work! *****");
+                        }
+                        
+                        SelectedWorkoutDetail = new WorkoutDetail();
 
-        //                // Create a body
-        //                Body body = mainPart.Document.AppendChild(new Body());
+                        MessageBox.Show("Workout saved successfully as a text file.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No workout selected");
+            }
 
-        //                // Add workout details to the document
-        //                DocumentFormat.OpenXml.Drawing.Paragraph paragraph = body.AppendChild(new DocumentFormat.OpenXml.Drawing.Paragraph());
-        //                DocumentFormat.OpenXml.Drawing.Run run = paragraph.AppendChild(new DocumentFormat.OpenXml.Drawing.Run());
-        //                run.AppendChild(new Text($"Workout ID: {SelectedWorkoutDetail.ID}"));
-        //                // Add more details as needed
-
-        //                // Save the document
-        //                mainPart.Document.Save();
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("No workout selected");
-        //    }
-        //}
+        }
     }
 
     // Implement ICommand interface to call different commands to the view.
