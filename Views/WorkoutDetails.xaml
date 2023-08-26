@@ -101,7 +101,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                            <!--Workout label, comboBox, textblock, sets/reps & weight-->
+                            <!--Workout label, textblock, sets/reps & weight-->
                             <Label Grid.Row="0" FontSize="20" Grid.Column="0" Content="Workout"/>
                             <TextBox  Grid.Row="0"  
                                       FontSize="20" 
@@ -147,7 +147,7 @@
                                       VerticalAlignment="center"
                                      Text="{Binding WorkoutDetail.Weight1}"/>
 
-                        <!--Workout label, comboBox, textblock, sets/reps & weight-->
+                        <!--Workout label, textblock, sets/reps & weight-->
                             <Label Grid.Row="3" FontSize="20" Grid.Column="0" Content="Workout"/>
                             <TextBox Grid.Row="3" Grid.Column="1" FontSize="20" Margin="3"
                                      FontWeight="Medium"
@@ -185,7 +185,7 @@
                                       BorderThickness="0,0,0,1"
                                       Height="28"
                                       VerticalAlignment="center"
-                                     Text="{Binding WorkoutDetail.Sets_Reps2}"/>
+                                     Text="{Binding WorkoutDetail.Weight2}"/>
 
                         <!--Workout label, comboBox, textblock, sets/reps & weight-->
                             <Label Grid.Row="6" FontSize="20" Grid.Column="0" Content="Workout"/>
