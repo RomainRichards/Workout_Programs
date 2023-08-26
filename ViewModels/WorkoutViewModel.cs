@@ -89,10 +89,11 @@ namespace Workout_Programs.ViewModels
             WorkoutDetail.ID = "WO" + workoutProgramDBEntities.WorkoutDetails.Count();
             if(WorkoutDetail != null)
             {
-                workoutProgramDBEntities.WorkoutDetails.Add(WorkoutDetail);
+                workoutProgramDBEntities.WorkoutDetails.Add(WorkoutDetail);    
                 workoutProgramDBEntities.SaveChanges();
-                WorkoutDetail = new WorkoutDetail();
                 LstWorkoutDetail.Add(WorkoutDetail);
+                WorkoutDetail = new WorkoutDetail();
+                
             }
             else
             {

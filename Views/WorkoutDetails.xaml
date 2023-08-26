@@ -336,7 +336,7 @@
                                       BorderThickness="0,0,0,1"
                                       Height="28"
                                       VerticalAlignment="center"
-                                     Text="{Binding SelectedWorkoutDetail.Sets_Reps2}"/>
+                                     Text="{Binding SelectedWorkoutDetail.Weight2}"/>
 
                         <!--Workout label, comboBox, textblock, sets/reps & weight-->
                             <Label Grid.Row="6" FontSize="20" Grid.Column="0" Content="Workout"/>
